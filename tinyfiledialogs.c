@@ -211,7 +211,7 @@ static char * getPathWithoutFinalSlash(
                 }
                 if (lTmp)
                 {
-                        strncpy(aoDestination, aSource, lTmp - aSource );
+                        strncpy(aoDestination, aSource, (size_t)(lTmp - aSource));
                         aoDestination[lTmp - aSource] = '\0';
                 }
                 else
@@ -343,7 +343,7 @@ void tfd_replaceSubStr( char const * aSource, char const * aOldSubStr,
         * aoDestination = '\0' ;
         while ( ( pOccurence = strstr( p , aOldSubStr ) ) != NULL )
         {
-                strncat( aoDestination , p , pOccurence - p ) ;
+                strncat( aoDestination , p , (size_t)(pOccurence - p) ) ;
                 strcat( aoDestination , lNewSubStr ) ;
                 p = pOccurence + lOldSubLen ;
         }
@@ -984,7 +984,7 @@ static char * ensureFilesExist(char * aDestination,
         p = aSourcePathsAndNames;
         while ((p2 = strchr(p, '|')) != NULL)
         {
-                lLen = p2 - p;
+                lLen = (size_t)(p2 - p);
                 memmove(lDestination, p, lLen);
                 lDestination[lLen] = '\0';
                 if (fileExists(lDestination))
@@ -5132,7 +5132,7 @@ my \\$notificationsObject = \\$notificationsService->get_object('/org/freedeskto
 
                 tcgetattr(0, &infoOri);
                 tcgetattr(0, &info);
-                info.c_lflag &= ~ICANON;
+                info.c_lflag &= (tcflag_t)(~ICANON);
                 info.c_cc[VMIN] = 1;
                 info.c_cc[VTIME] = 0;
                 tcsetattr(0, TCSANOW, &info);
@@ -5940,7 +5940,7 @@ frontmost of process \\\"Python\\\" to true' ''');");
                 {
                         tcgetattr(STDIN_FILENO, & oldt) ;
                         newt = oldt ;
-                        newt.c_lflag &= ~ECHO ;
+                        newt.c_lflag &= (tcflag_t)(~ECHO) ;
                         tcsetattr(STDIN_FILENO, TCSANOW, & newt);
                 }
 
