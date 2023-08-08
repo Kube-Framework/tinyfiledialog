@@ -3649,7 +3649,7 @@ static int speakertestPresent(void)
 }
 
 
-static int playPresent()
+static int playPresent(void)
 {
    static int lPlayPresent = -1;
    if (lPlayPresent < 0)
@@ -3660,7 +3660,7 @@ static int playPresent()
 }
 
 
-static int beepexePresent()
+static int beepexePresent(void)
 {
    static int lBeepexePresent = -1;
    if (lBeepexePresent < 0)
